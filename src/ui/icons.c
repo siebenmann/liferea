@@ -105,6 +105,7 @@ icons_load (void)
 		"gtk-connect",		/* ICON_ONLINE */
 		"gtk-disconnect",	/* ICON_OFFLINE */
 		"mail-attachment",	/* ICON_ENCLOSURE */
+		NULL,			/* ICON_UPDATED */
 		NULL
 	};
 
@@ -129,6 +130,7 @@ icons_load (void)
 		"online.png",		/* ICON_ONLINE */
 		"offline.png",		/* ICON_OFFLINE */
 		"attachment.png",	/* ICON_ENCLOSURE */
+		"edit.png",		/* ICON_UPDATED */
 		NULL
 	};
 

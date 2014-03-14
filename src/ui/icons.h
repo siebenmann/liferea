@@ -39,6 +39,7 @@ typedef enum {
 	ICON_ONLINE,
 	ICON_OFFLINE,
 	ICON_ENCLOSURE,
+	ICON_UPDATED,
 	MAX_ICONS
 } lifereaIcon;
 

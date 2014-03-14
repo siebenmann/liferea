@@ -463,6 +463,7 @@ item_list_view_update_item (ItemListView *ilv, itemPtr item)
 
 	state_icon = item->flagStatus ? icon_get (ICON_FLAG) :
 	             !item->readStatus ? icon_get (ICON_UNREAD) :
+		     item->updateStatus ? icon_get (ICON_UPDATED) :
 		     NULL;
 
 	if (ilv->priv->batch_mode)
@@ -788,9 +789,11 @@ item_list_view_add_item_to_tree_store (ItemListView *ilv, GtkTreeStore *itemstor
 	gboolean	exists;
 		
 	if (item->flagStatus)
-		state += 2;
-	if (!item->readStatus)
 		state += 1;
+	if (!item->readStatus)
+		state += 4;
+	if (item->updateStatus)
+		state += 2;
 		
 	node = node_from_id (item->nodeId);
 	if(!node)

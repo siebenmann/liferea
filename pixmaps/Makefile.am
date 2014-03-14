@@ -11,7 +11,8 @@ EXTRA_DIST = \
 	unread.png      \
 	vfolder.png     \
 	fl_opml.png	\
-	newsbin.png	
+	newsbin.png	\
+	edit.png
 
 lifereadistpixdir = $(datadir)/$(PACKAGE)/pixmaps
 lifereadistpix_DATA = $(EXTRA_DIST)
