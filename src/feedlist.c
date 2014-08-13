@@ -438,15 +438,18 @@ feedlist_node_added (nodePtr node)
 	}
 
 	node_set_parent (node, feedlist_get_parent_node (), position);
-	
+
+	debug1 (DEBUG_UPDATE, "about to start db update: %s", node_get_title(node));
 	if (node->subscription)
 		db_subscription_update (node->subscription);
 	
 	db_node_update (node);
+	debug1 (DEBUG_UPDATE, "finished db update: %s", node_get_title(node));
 
 	feedlist_node_imported (node);
 	
 	feed_list_view_select (node);
+	debug1 (DEBUG_UPDATE, "all done update: %s", node_get_title(node));
 }
 
 void

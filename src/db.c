@@ -1574,12 +1574,15 @@ db_node_update (nodePtr node)
 	sqlite3_bind_int  (stmt, 7, node->sortColumn);
 	sqlite3_bind_int  (stmt, 8, node->sortReversed?1:0);
 	
+	debug1 (DEBUG_DB, "about to sqlite3_step node info %s", node->id);
 	res = sqlite3_step (stmt);
 	if (SQLITE_DONE != res)
 		g_warning ("Could not update node info %s in DB (error code %d)!", node->id, res);
 
+	debug1 (DEBUG_DB, "about to sqlite3_finalize node info %s", node->id);
 	sqlite3_finalize (stmt);
 		
+	debug1 (DEBUG_DB, "updating node info %s DONE", node->id);
 	debug_end_measurement (DEBUG_DB, "node update");
 }
 

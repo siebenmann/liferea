@@ -248,13 +248,16 @@ subscription_process_update_result (const struct updateResult * const result, gp
 	itemview_update_node_info (subscription->node);
 	itemview_update ();
 
+	debug1 (DEBUG_UPDATE, "updating subscription state: %s", node_get_title(subscription->node));
 	db_subscription_update (subscription);
 	db_node_update (subscription->node);
+	debug1 (DEBUG_UPDATE, "done updating subscription state: %s", node_get_title(subscription->node));
 
 	if (subscription->node->newCount > 0) {
 		feedlist_new_items (node->newCount);
 		feedlist_node_was_updated (node);
 	}
+	debug1 (DEBUG_UPDATE, "all done subscription update: %s", node_get_title(subscription->node));
 }
 
 void

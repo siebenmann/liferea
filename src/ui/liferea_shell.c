@@ -562,6 +562,7 @@ on_notebook_scroll_event_null_cb (GtkWidget *widget, GdkEventScroll *event)
 static gboolean
 on_close (GtkWidget *widget, GdkEvent *event, gpointer user_data)
 {
+	debug0 (DEBUG_GUI, "on_close (hiding window)");
 	liferea_shutdown ();
 	
 	return TRUE;
@@ -1135,6 +1136,7 @@ liferea_shell_restore_state (const gchar *overrideWindowState)
 
 	/* Initialize with last saved state */
 	conf_get_int_value (LAST_WINDOW_STATE, &resultState);
+	resultState = MAINWINDOW_SHOWN;		/* cks: NOPE */
 
 	debug2 (DEBUG_GUI, "Previous window state indicators: dconf=%d, CLI switch=%s", resultState, overrideWindowState);
 
@@ -1160,6 +1162,7 @@ liferea_shell_restore_state (const gchar *overrideWindowState)
 			/* Safe default is always to show window */
 			debug0 (DEBUG_GUI, "Restoring window state 'shown'");
 			gtk_widget_show (GTK_WIDGET (shell->priv->window));
+			resultState = MAINWINDOW_SHOWN;
 	}
 
 	/* This only works after the window has been restored, so we do it last. */
@@ -1175,6 +1178,8 @@ liferea_shell_restore_state (const gchar *overrideWindowState)
 	if (last_wpane_pos)
 		gtk_paned_set_position (GTK_PANED (liferea_shell_lookup ("wideViewPane")), last_wpane_pos);
 
+	/* cks: Save window state to what it is now, thanks. */
+	conf_set_int_value (LAST_WINDOW_STATE, resultState);
 }
 
 void
